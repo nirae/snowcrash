@@ -1,11 +1,11 @@
 # Level00
 
-Who am I ?
+Qui suis-je ?
 
 	$ id
 	uid=2000(level00) gid=2000(level00) groups=2000(level00),100(users)
 
-Where am I ?
+Ou suis-je ?
 
 	$ pwd
 	/home/user/level00
@@ -17,16 +17,16 @@ Where am I ?
 	-r-xr-x---+ 1 level00 level00  220 Apr  3  2012 .bash_logout
 	-r-xr-x---+ 1 level00 level00 3518 Aug 30  2015 .bashrc
 
-My files on the system
+Mes fichiers sur le systeme
 
 	$ find / -user level00
 	(nothing)
 
-Nothing interesting in this part
+Rien d'interessant dans cette partie
 
 ***********************************************************
 
-Research on the user I want : **flag00**
+Recherche sur le user cible : **flag00**
 
 	$ ls /home/user/flag00
 	ls: cannot access /home/user/flag00: No such file or directory
@@ -45,11 +45,11 @@ Research on the user I want : **flag00**
 	$ cat /rofs/usr/sbin/john
 	cdiiddwpgswtgt
 
-A code found, it's not the password. Need to decode
+Un code trouvé, fonctionne pas en password. A déchiffrer
 
-With the tool dcode.fr/chiffre-cesar -> "tester tous les décalages possibles"
+Avec l'outil dcode.fr/chiffre-cesar -> "tester tous les décalages possibles"
 
-There is one that means something : **nottoohardhere**
+Il y en a un qui a un sens : **nottoohardhere**
 
 	$ su flag00
 	password: nottoohardhere
