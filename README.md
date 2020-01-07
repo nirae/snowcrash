@@ -36,4 +36,12 @@ Réseau Virtualbox NAT -> Redirection de port
 - level03 : Modification du PATH - binaire appel 'system'
 - level04 : Exploit script perl
 - level05 : cron execute tous les binaires d'un dossier
-- level06 : 
+- level06 : Faille modifier "e" des REGEX php
+- level07 : Injection par une varible d'environnement
+- level08 : Bypass d'un check dans le code par un lien symbolique
+- level09 : Reverse de hash
+- level10 : Race condition entre access et open
+- level11 : Faille via io.popen dans un script lua
+- level12 : Faille via un subshell dans un script perl
+- level13 : Modifier valeur de retour d;une fonction avec GDB
+- level14 : Exploiter getflag
