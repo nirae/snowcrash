@@ -16,7 +16,7 @@ Clique sur l'option : Analyser flux TCP
 
 On trouve : "ft_wandr...NDRel.L0L"
 
-En regardant les paquets qui correspondent aux lettres, on voit que les points sont le caractere "\177" qui est "DEL"
+En regardant les paquets qui correspondent aux lettres, on voit que les points sont le caractere "7f" dans la table ASCII qui est "DEL"
 On les enlève et on supprime les caracteres avant qui ont donc été DEL
 
 Mot de passe final : "ft_waNDReL0L"

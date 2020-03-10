@@ -24,7 +24,7 @@ Un script perl qui utilise CGI, donc servi par un serveur web, sur le port 4747 
 
 Testons avec curl
 
-	$ curl -I 192.168.1.27:4747
+	$ curl -I localhost:4747
 	HTTP/1.1 200 OK
 	Date: Thu, 28 Nov 2019 11:04:23 GMT
 	Server: Apache/2.2.22 (Ubuntu)

@@ -54,7 +54,7 @@ Container Docker Kali linux avec en volume le fichier passwd
 	$ docker run --rm --privileged -v `pwd`:/Ressources -ti kalilinux/kali-linux-docker /bin/bash
 	$ apt-get update && apt-get install john -y
 	$ cd /Ressources
-	$ john passwd
+	$ john --show passwd
 	...
 	abcdefg          (flag01)
 	...
