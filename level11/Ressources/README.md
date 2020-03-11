@@ -48,7 +48,7 @@ end
 C'est un programme qui ouvre une connexion et attends un password pour le comparer avec celui hashé
 Il utilise la fonction "io.popen" pour la fonction de hash. Cette fonction permet d'executer des programmes. Le programme s'en sert pour executer une commande
 
-`io.popen("echo "..pass.." | sha1sum", "r")`
+	io.popen("echo "..pass.." | sha1sum", "r")
 
 Il execute un echo + le mdp reçu pipé avec sha1sum pour obtenir le hash
 
@@ -61,6 +61,6 @@ Il attend bien le mot de passe
 
 On peut injecter des commandes a executer pour completer sa commande directement dans le mot de passe :
 
-`$(getflag) > /tmp/coucou; chmod 777 /tmp/coucou; echo coucou`
+`$(getflag) > /tmp/coucou;`
 
 Le flag se trouve donc dans le fichier "/tmp/coucou"

